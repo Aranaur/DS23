@@ -108,6 +108,62 @@ vector_1 - 2
 
 vector_4 + 5:10
 
+seq_vec[2:7] <- mean(seq_vec)
+seq_vec
+
+seq_vec[c(-1, -5, -45)]
+
+# # # # # # # # # # # # # # # # # # # # # # # 
+
+matrix_1 <- matrix(1:16, nrow = 4, byrow = TRUE)
+
+matrix_1[1:2, 3:4] <- mean(matrix_1)
+
+matrix_1[, 3]
+
+# # # # # # # # # # # # # # # # # # # # # # # 
+
+array(1:16, c(4, 2, 2))
+
+# # # # # # # # # # # # # # # # # # # # # # # 
+
+list_1 <- list(vec = 1:5,
+               hello = "Hello, R!",
+               matrix = matrix(1:16, nrow = 4, byrow = TRUE))
+
+list_1[[3]]
+list_1$hello
+list_1$matrix[3, 4]
+
+# # # # # # # # # # # # # # # # # # # # # # # 
+
+df_1 <- data.frame(
+  name = c('Frodo', 'Arwen', 'Legolas'),
+  sex = c('male', 'female', 'male'),
+  age = c(51, 2700, 2931),
+  one_ring = c(TRUE, FALSE, FALSE)
+)
+
+str(df_1)
+
+names(df_1)
+
+df_1$name[2]
+
+df_1[2, 3]
+
+df_1[2, "name"]
+
+# # # # # # # # # # # # # # # # # # # # # # # 
+
+library(tidyverse)
+
+
+dplyr::filter()
+
+
+
+
 
 
 
