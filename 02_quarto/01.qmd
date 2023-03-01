@@ -1,0 +1,103 @@
+---
+title: "Quarto"
+subtitle: "Data Science"
+author: "Ігор Мірошниченко"
+date: "March 01, 2023"
+language: _language-ukr.yml
+format: 
+  html:
+    toc: true
+    code-fold: true
+editor_options: 
+  chunk_output_type: console
+---
+
+Всім привіт!
+
+```{r}
+x = sin(10) * pi
+cat('Змінна х дорівнює:', round(x, 2))
+```
+
+
+# Текст
+
+## Жирний текст
+Для написання жирного тексту використовується подвійний знак `*` на початку і в кінці.
+
+## Курсив
+Для написання курсивом використовується одинарний знак `*` на початку і в кінці.
+
+### Підпараграф
+
+R is *free software* and comes with _ABSOLUTELY NO WARRANTY_.
+You are **welcome** to redistribute it under __certain conditions__.
+Type `license()` or 'licence()' for ~~distribution details~~.
+
+x^2^
+
+x~i~
+
+# Посилання
+
+[Конспект по Quarto](https://aranaur.github.io/py4ds/04_quarto.html)
+
+![](https://aranaur.github.io/py4ds/img/quarto2.jpg)
+
+[![Google](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1280px-Google_2015_logo.svg.png)](https://www.google.com.ua/?hl=uk)
+
+# Списки
+
+* список 1
+* наступний пункт
+    + підпункт 1
+    + підпункт 2
+    
+1. Номер 1
+2. Номер 2
+    a) 2.1
+    b) 2.2
+
+(@) Пункт 1
+
+текст
+
+(@) Пункт 2
+
+# Таблиці
+```{r}
+head(cars)
+```
+
+https://www.tablesgenerator.com/markdown_tables
+
+
+| $x_i$ | 0-24 | 24-48 | 48-72 | 72-96 | 96-120 | 120-144 | 144-168 | 168-192 | 192-216 |
+|:-------:|:----:|:-----:|:-----:|:-----:|:------:|:-------:|:-------:|:-------:|:-------:|
+| $n_i$ |   1  |   2   |   4   |   6   |   10   |    16   |    6    |    2    |    1    |
+
+# Формули
+
+https://latex.codecogs.com/eqneditor/editor.php
+
+$x\tfrac{4}{5}$
+
+$$e = mc^2$$
+
+# Код
+
+```{r}
+#| label: formula
+#| include: false
+x = pi^2 * sin(123)
+x
+```
+
+```{r}
+x
+```
+
+
+
+
+
