@@ -1,4 +1,5 @@
 library(tidyverse)
+library(magrittr)
 
 iris
 typeof(iris)
@@ -32,3 +33,131 @@ cars_xlsx <- read_excel('00_data/cars2018.xlsx', sheet = "cars2018")
 cars_xlsx
 
 ##############################
+
+# dplyr
+
+glimpse(cars)
+
+sort(log(sqrt(abs(sin(1:10)))))
+
+1:2 %>% sin()  # CTRL + SHIFT + M
+
+1:10 %>% 
+  sin() %>% 
+  abs() %>% 
+  sqrt() %>% 
+  log() %>% 
+  sort()
+
+cars %>% 
+  glimpse()
+
+# filter()
+
+cars_manual_10 <- cars %>% 
+  dplyr::filter(transmission == 'Manual',
+                cylinders == 10)
+  
+cars %>% 
+  filter(transmission == 'Manual' | transmission == 'CVT',
+         cylinders >= mean(cylinders))
+
+cars %>% 
+  filter(transmission %in% c('Manual', 'CVT'),
+         cylinders >= mean(cylinders))
+  
+# slice()
+
+cars %>% 
+  slice(seq(1, nrow(cars), 2))
+  
+cars %>% 
+  slice(-(1:50)) 
+
+cars %>% 
+  slice_head(n = 20)
+
+cars %>% 
+  head(n = 20)
+
+cars %>% 
+  slice_tail(n = 20)
+
+cars %>% 
+  slice_max(mpg, n = 3)
+
+cars %>% 
+  slice_min(mpg, n = 5)
+
+set.seed(2023)
+cars %>% 
+  slice_sample(n = 10, replace = FALSE) %>% 
+  arrange(desc(mpg))
+
+
+cars %>% 
+  filter(str_detect(model, "a$"))
+
+# select()
+
+cars %>% 
+  select(model, mpg:recommended_fuel)
+
+cars %>% 
+  select(seq(1, ncol(cars), 2))
+
+cars %>% 
+  select(!c(model, mpg))
+
+cars %>% 
+  select(starts_with('m'))
+
+cars %>% 
+  select(ends_with('s'))
+
+cars %>% 
+  select(contains('x'))
+
+cars %>% 
+  select(matches('[oe]r'))
+
+cars %>% 
+  select(where(is.numeric), model)
+
+cars %>% 
+  select(model, where(is.numeric), everything())
+
+# relocate()
+
+cars %>% 
+  relocate(where(is.numeric), .before = where(is.character))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
