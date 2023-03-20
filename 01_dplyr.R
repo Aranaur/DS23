@@ -132,7 +132,85 @@ cars %>%
 cars %>% 
   relocate(where(is.numeric), .before = where(is.character))
 
+# rename()
 
+cars %>% 
+  rename(model_id = model_index)
+
+cars %>% 
+  rename_with(toupper, starts_with('m'))
+
+cars %>% 
+  rename_with(~ gsub('_', '.', .x))
+
+cars %>% 
+  set_names(
+    names(.) %>% str_replace('_', '.') %>% str_to_title()
+  )
+
+# mutate()
+
+cars %>% 
+  mutate(mpg_per_cyl = mpg / cylinders, .after = mpg)
+
+cars %>% 
+  transmute(model, mpg, cylinders,
+            mpg_per_cyl = mpg / cylinders)
+
+# group_by() + summarise()
+
+cars %>% 
+  group_by(transmission) %>% 
+  summarise(mean_mpg = mean(mpg, na.rm = TRUE),
+            md_mpg = median(mpg, na.rm=TRUE),
+            sd_mpg = sd(mpg),
+            )
+
+# across()
+
+cars %>% 
+  select(-model_index) %>% 
+  group_by(transmission) %>% 
+  summarise(across(where(is.numeric), mean))
+
+cars %>% 
+  select(-model_index) %>% 
+  group_by(transmission) %>% 
+  summarise(across(where(is.numeric),
+                   list(avg = mean, stdev = sd, md = median),
+                   .names = '{.fn}_{.col}'))
+
+# count()
+
+cars %>% 
+  group_by(transmission) %>% 
+  summarise(n = n()) %>% 
+  arrange(-n)
+
+cars %>% 
+  count(transmission, sort = TRUE)
+
+# case_when()
+
+cars %>% 
+  # group_by(cylinders) %>% 
+  # summarise(mean_mpg = mean(mpg)) %>% 
+  mutate(
+    type_mpg = case_when(
+      mpg > 25 ~ 'hight',
+      mpg > 20 ~ 'medium',
+      TRUE ~ 'low'
+    ),
+    .after = model
+  )
+
+# pivot_*()
+
+cars %>% 
+  select(1:5) %>% 
+  pivot_longer(!model,
+               names_to = 'vars_name',
+               values_to = 'values')
 
 
 
