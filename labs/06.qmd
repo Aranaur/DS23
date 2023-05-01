@@ -1,0 +1,25 @@
+---
+title: "Лабораторна робота №6"
+subtitle: "Data Science"
+language: _language-ukr.yml
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+Спробуйте знайти сайт з даними доступ до яких можна отримати за допомогою API або шляхом ручного пошуку API endpoint.
+
+Наприклад:
+
+- [World Bank Open Data](https://data.worldbank.org/)
+- [Spotify](https://developer.spotify.com/documentation/web-api)
+- [API Google Analytics](https://developers.google.com/analytics/devguides/reporting/core/v4)
+- [Google Ads](https://developers.google.com/google-ads/api/docs/start)
+- [Facebook Marketing](https://www.facebook.com/business/marketing/facebook)
+- тощо...
+
+::: {.callout-tip}
+## Примітка
+
+Звіт оформити за допомогою **Quarto**.
+:::
