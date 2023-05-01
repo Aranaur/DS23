@@ -145,5 +145,142 @@ penguins %>%
   theme(legend.position = c(0.1, 0.2),
         legend.title = element_blank())
 
+# bubble plot -----------------------------------------
+
+penguins %>% 
+  ggplot(aes(bill_length_mm, bill_depth_mm, color = species)) +
+  geom_point(aes(size = body_mass_g), alpha = 0.4) + 
+  scale_color_manual(values = c("#19a6b3","#f26c0d","#5e3894")) +
+  theme_bw()
+
+
+penguins %>% 
+  ggplot(aes(bill_length_mm, bill_depth_mm, color = species)) +
+  geom_point(aes(size = body_mass_g), alpha = 0.4) + 
+  scale_color_manual(values = c("#19a6b3","#f26c0d","#5e3894")) +
+  theme_bw() +
+  scale_size(range = c(.2,5), guide = guide_legend()) +
+  labs(x= 'Довжина клюва, мм',
+       y = 'Ширина клюва, мм',
+       title = 'Характеристики типів пінгвінів',
+       subtitle = 'Види пінгвінів зі станції Палмер',
+       caption = 'Дані: Long Term Ecological Research Network') +
+  theme(legend.title = element_blank())
+
+# bar plot -----------------------------------------
+
+penguins %>% 
+  count(species, sort = TRUE) %>% 
+  ggplot() +
+  geom_bar(aes(x=n, fill = species)) +
+  scale_fill_manual(values = c("#19a6b3","#f26c0d","#5e3894")) +
+  theme_bw()
+
+penguins %>% 
+  ggplot() +
+  geom_bar(aes(x=species, fill = species)) +
+  scale_fill_manual(values = c("#19a6b3","#f26c0d","#5e3894")) +
+  theme_bw() +
+  coord_flip()
+
+penguins %>% 
+  ggplot() +
+  geom_bar(aes(x=species, fill = species)) +
+  scale_fill_manual(values = c("#19a6b3","#f26c0d","#5e3894")) +
+  theme_bw() +
+  coord_polar('y')
+
+penguins %>% 
+  count(species) %>% 
+  # mutate(prop = n / sum(n)) %>% 
+  ggplot(aes(x = n, y = fct_reorder(species, n))) +
+  geom_col()
+
+penguins %>% 
+  ggplot() +
+  geom_bar(aes(x=island, fill=species),
+           position = 'fill')
+
+penguins %>% 
+  filter(sex == 'female') %>% 
+  count(species) %>% 
+  ggplot() +
+  geom_bar(aes(x='', y = n, fill = species), stat = 'identity') +
+  coord_polar('y') +
+  theme_void()
+
+# lolipop plot -----------------------------------------
+
+ggplot(penguins %>% 
+         count(species) %>% 
+         arrange(n) %>% 
+         mutate(species = factor(species, levels = species))) +
+  geom_segment(aes(x = species, xend = species,
+                   y = 0, yend = n), linewidth = 1) +
+  geom_point(aes(x = species, y = n, color = species), size = 4) +
+  coord_flip()
+
+# hist plot -----------------------------------------
+
+penguins %>% 
+  ggplot() +
+  geom_histogram(aes(x=bill_length_mm, fill = species), alpha = 0.5)
+
+penguins %>% 
+  ggplot() + 
+  geom_density(aes(x=bill_length_mm, fill = species), alpha = 0.5)
+
+penguins %>% 
+  drop_na() %>% 
+  filter(species == 'Adelie') %>% 
+  ggplot() +
+  geom_density(aes(x=bill_length_mm, fill = sex), alpha = 0.5)
+
+
+library(ggridges) # joyplot | ridgeline
+
+penguins %>% 
+  ggplot() +
+  geom_density_ridges(aes(x=bill_length_mm, y = species, fill = species), alpha = 0.5, color = NA) +
+  theme_minimal()
+
+penguins %>% 
+  drop_na() %>% 
+  ggplot() +
+  geom_density_ridges(aes(x = body_mass_g, y = species, fill = sex),
+                      alpha = 0.5, color = NA, scale = 1)
+
+# penguins %>% 
+#   drop_na() %>% 
+#   ggplot() +
+#   stat_density_ridges(aes(x = body_mass_g, y = species, fill = species),
+#                       alpha = 0.5, color = NA, scale = 1, quantile_lines = TRUE)
+  
+# boxplot plot -----------------------------------------
+
+penguins %>% 
+  ggplot() +
+  geom_boxplot(aes(y = bill_length_mm, fill = species))
+
+penguins %>% 
+  ggplot(aes(y = bill_length_mm, x = species)) +
+  geom_violin(aes(fill = species), alpha = 0.5, color = NA) +
+  geom_jitter(aes(color = species), width = 0.2, alpha = 0.5) + 
+  geom_boxplot(color = '#e5e3e3', fill = NA, size = 1, width = 0.5) +
+  theme_bw()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
